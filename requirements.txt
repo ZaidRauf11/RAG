@@ -1,0 +1,18 @@
+# Python packages or dependencies
+numpy
+langchain_ollama
+pypdf
+fastapi
+uvicorn
+python-multipart
+
+langchain
+langchain-community
+faiss-cpu
+streamlit
+langchain-google-genai
+docx2txt
+sentence-transformers
+langchain-core 
+unstructured
+python-docx

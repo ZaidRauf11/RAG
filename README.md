@@ -1,6 +1,3 @@
-Here’s your **final cleaned README** — you can copy-paste it directly into your `README.md` file on GitHub.
-
-````markdown
 # 🤖 RAG-Powered Document Chatbot (PDF, Word & More)
 
 A **Retrieval-Augmented Generation (RAG)** chatbot built with **LangChain**, **FAISS**, **HuggingFace embeddings**, and **Ollama**.  

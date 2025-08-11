@@ -29,7 +29,7 @@ cd document-chatbot
 
 ---
 
-### 2️⃣ Install Dependencies
+2️⃣ Install Dependencies
 Make sure you have Python 3.9+ installed.
 pip install -r requirements.txt
 

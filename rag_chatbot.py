@@ -11,7 +11,7 @@ from langchain_core.prompts import PromptTemplate
 
 # --- OLLAMA_BASE_URL ---
 load_dotenv()
-OLLAMA_BASE_URL = os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")
+OLLAMA_BASE_URL = (os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")or st.secrets.get("RAG_CHATBOT_OLLAMA_BASE_URL"))
 print("Using Ollama at:", OLLAMA_BASE_URL)
 
 # --- Embeddings Model ---
@@ -145,6 +145,7 @@ def main():
 # Run App
 if __name__ == "__main__":
     main()
+
 
 
 

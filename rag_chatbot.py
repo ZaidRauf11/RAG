@@ -1,6 +1,5 @@
 import os
 import streamlit as st
-from dotenv import load_dotenv
 from langchain_community.document_loaders import (PyPDFLoader,Docx2txtLoader,TextLoader)
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_community.chat_models import ChatOllama
@@ -8,11 +7,6 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
-
-# --- OLLAMA_BASE_URL ---
-load_dotenv()
-OLLAMA_BASE_URL = (os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")or st.secrets.get("RAG_CHATBOT_OLLAMA_BASE_URL"))
-print("Using Ollama at:", OLLAMA_BASE_URL)
 
 # --- Embeddings Model ---
 embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
@@ -63,18 +57,7 @@ prompt = PromptTemplate(template=prompt_template, input_variables=["context", "q
 
 # --- Load LLM from Ollama ---
 def get_ollama_llm():
-    # Load from Streamlit secrets first, fallback to env vars
-    ollama_url = st.secrets.get("RAG_CHATBOT_OLLAMA_BASE_URL") or os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")
-    
-    if not ollama_url:
-        raise ValueError("❌ Ollama URL not found. Please set RAG_CHATBOT_OLLAMA_BASE_URL in secrets or .env")
-
-    print("Using Ollama at:", ollama_url)
-
-    return ChatOllama(
-        model="deepseek-r1:1.5b",
-        base_url=ollama_url  # ✅ Force it to use ngrok URL
-    )
+    return ChatOllama(model="deepseek-r1:1.5b")
 
 # --- Get Answer from Retriever + LLM ---
 def get_answer(query):

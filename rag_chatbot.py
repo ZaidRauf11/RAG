@@ -1,5 +1,6 @@
 import os
 import streamlit as st
+from dotenv import load_dotenv
 from langchain_community.document_loaders import (PyPDFLoader,Docx2txtLoader,TextLoader)
 from langchain.embeddings import HuggingFaceEmbeddings
 from langchain_community.chat_models import ChatOllama
@@ -9,6 +10,7 @@ from langchain.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 
 # --- OLLAMA_BASE_URL ---
+load_dotenv()
 OLLAMA_BASE_URL = os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")
 print("Using Ollama at:", OLLAMA_BASE_URL)
 
@@ -132,6 +134,7 @@ def main():
 # Run App
 if __name__ == "__main__":
     main()
+
 
 
 

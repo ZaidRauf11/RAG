@@ -8,6 +8,10 @@ from langchain_community.vectorstores import FAISS
 from langchain.chains import RetrievalQA
 from langchain_core.prompts import PromptTemplate
 
+# --- OLLAMA_BASE_URL ---
+OLLAMA_BASE_URL = os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")
+print("Using Ollama at:", OLLAMA_BASE_URL)
+
 # --- Embeddings Model ---
 embeddings_model = HuggingFaceEmbeddings(model_name="all-MiniLM-L6-v2")
 
@@ -128,6 +132,7 @@ def main():
 # Run App
 if __name__ == "__main__":
     main()
+
 
 
 

@@ -63,7 +63,18 @@ prompt = PromptTemplate(template=prompt_template, input_variables=["context", "q
 
 # --- Load LLM from Ollama ---
 def get_ollama_llm():
-    return ChatOllama(model="deepseek-r1:1.5b")
+    # Load from Streamlit secrets first, fallback to env vars
+    ollama_url = st.secrets.get("RAG_CHATBOT_OLLAMA_BASE_URL") or os.getenv("RAG_CHATBOT_OLLAMA_BASE_URL")
+    
+    if not ollama_url:
+        raise ValueError("❌ Ollama URL not found. Please set RAG_CHATBOT_OLLAMA_BASE_URL in secrets or .env")
+
+    print("Using Ollama at:", ollama_url)
+
+    return ChatOllama(
+        model="deepseek-r1:1.5b",
+        base_url=ollama_url  # ✅ Force it to use ngrok URL
+    )
 
 # --- Get Answer from Retriever + LLM ---
 def get_answer(query):
@@ -134,6 +145,7 @@ def main():
 # Run App
 if __name__ == "__main__":
     main()
+
 
 
 
